@@ -25,8 +25,7 @@ iPERDance
 #### Contributors
 ```
 멀티캠퍼스 3차 Final Project 1조입니다.
-정재은, 윤민영, 송민성, 황상미, 석원경, 강신웅
+정재은, 윤민영, 송민성, 황상미, 석원경, 강신웅 \
 구글 드라이브 주소
-[https://drive.google.com/drive/folders/15busPXp3I_-W18_gLqjdhZYdtE6VPbYn](https://drive.google.com/drive/folders/1lBioKj8Z5hAiXPuCbmscgqVmjj5VfqV3?usp=sharing
-)
+[https://drive.google.com/drive/folders/1lBioKj8Z5hAiXPuCbmscgqVmjj5VfqV3]
 ```
