@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+<strong>Imitator 결과</strong>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-sm-1">
+    </div>
+    <div class="col-sm-10">
+        <div class="card text-white bg-secondary mt-4 mb-4" style="height:620px;">
+            <div class="card-body">
+                <h5 class="card-title">춤 동작 적용 결과</h5>
+                <p class="card-text"></p>
+                <div class='row justify-content-center mt-3 mb-3'>
+                    <video style="height:100%; no-repeat center center; background-size:cover;" controls autoplay>
+                        <source src="static\result\신웅Tomboy.mp4">
+                    </video>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-1">
+    </div>
+    <div>
+        <button type="submit" class="btn btn-primary mt-1 mb-5">Retry</button>
+    </div>
+</div>
+{% endblock %}

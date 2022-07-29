@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+<strong>동작 모방</strong>
+{% endblock %}
+
+{% block content %}
+<form action="/menu2" method="POST" enctype="multipart/form-data">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="card text-white bg-secondary mt-4 mb-4" style="height:620px; margin-left:20%; margin-right:5px">
+                <div class="card-body">
+                    <h5 class="card-title">적용할 춤 영상</h5>
+                    <p class="card-text">모델에 입혀서 적용할 춤을 선택하세요</p>
+                    {% for option in dance_options[:-1] %}
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="dance_option" value="{{option.val}}" id="dance_{{loop.index0}}" 
+                                    onclick="display({{loop.index0}})"
+                                    {% if loop.first %} checked {% endif %}> {{option.disp}}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="dance_option" value="{{dance_options[-1].val}}" id="dance_direct"> {{dance_options[-1].disp}}
+                        </label>
+                    </div>
+                    <div class="custom-file mt-3">
+                        <input type="file" class="custom-file-input" id="dance_upload" name="dance_upload" accept="video/*" disabled>
+                        <label class="custom-file-label" for="dance_upload">춤 영상 업로드</label>
+                    </div>
+                    <div class='mt-3'>
+                        <strong>선택된 춤 영상 :</strong>
+                    </div>
+                    <div class='row justify-content-center mt-3 mb-3'>
+                        <video id="preview1" style="width:90%; height:100%; no-repeat center center; background-size:cover;" controls muted autoplay>
+                            <source id="src1", src="static\dance2\Tomboy.mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card text-white bg-secondary mt-4 mb-4" style="height:620px; margin-left:5px; margin-right:5px">
+                <div class="card-body">
+                    <h5 class="card-title">사용자 360˚ 회전 영상</h5>
+                    <p class="card-text">360˚ 회전하면서 녹화한 모델의 영상을 선택하세요</p>
+                    {% for option in user_360_options[:-1] %}
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="user_360_option" value="{{option.val}}" id="user360_{{loop.index0}}" 
+                                    onclick="display({{loop.index0}})"
+                                    {% if loop.first %} checked {% endif %}> {{option.disp}}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="user_360_option" value="{{user_360_options[-1].val}}" id="user_360_direct"> {{user_360_options[-1].disp}}
+                        </label>
+                    </div>
+                    <div class="custom-file mt-3">
+                        <input type = "file" class="custom-file-input" id="user_360_upload" name="user_360_upload" accept="video/*" onchange="readURL2(this);" disabled>
+                        <label class="custom-file-label" for="user_360_upload">모델 360˚ 영상 업로드</label>
+                    </div>
+                    <div class='mt-3'>
+                        <strong>선택된 모델 360˚ 영상 :</strong>
+                    </div>
+                    <div class='row justify-content-center mt-3 mb-3'>
+                        <video id="preview2" style="width:80%; height:100%; no-repeat center center; background-size:cover;" controls muted autoplay>
+                            <source id="src2", src="static\user_360\신웅360video.mp4">
+                        </video>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="card text-white bg-secondary mt-4 mb-4" style="height:620px; margin-left:5px; margin-right:20%">
+                <div class="card-body">
+                    <h5 class="card-title">배경 사진</h5>
+                    <p class="card-text">무대가 될 배경을 선택하세요</p>
+                    {% for option in background_options[:-1] %}
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                                <input type="radio" class="form-check-input" name="background_option" value="{{option.val}}" id="background_{{loop.index0}}" 
+                                    onclick="display({{loop.index0}})"
+                                    {% if loop.first %} checked {% endif %}> {{option.disp}}
+                            </label>
+                        </div>
+                    {% endfor %}
+                    <div class="form-check-inline">
+                        <label class="form-check-label">
+                            <input type="radio" class="form-check-input" name="background_option" value="{{background_options[-1].val}}" id="background_direct"> {{background_options[-1].disp}}
+                        </label>
+                    </div>
+                    <div class="custom-file mt-3">
+                        <input type="file" class="custom-file-input" id="background_upload" name="background_upload" accept="image/*" onchange="previewP(this);" disabled>
+                        
+                        <label class="custom-file-label" for="background_upload">배경 사진 업로드</label>
+                    </div>
+                    <div class='mt-3'>
+                        <strong>선택된 배경 사진 :</strong>
+                    </div>
+                    <div class='row justify-content-center mt-3 mb-3'>
+                        <img id="preview3" src="static\background\spotlight.jpg" style="height:50%; no-repeat center center;background-size:cover;">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary mt-1 mb-5 ">Submit</button>
+        </div>
+    </div>
+</form>
+{% endblock %}
+
+{% block additional_body %}
+    <script>
+
+        $("#dance_direct").on("click", function() {
+            var condition = $("#dance_upload").prop("disabled");
+            $("#dance_upload").prop("disabled", condition ? false : true);
+        });
+        $("#user_360_direct").on("click", function() {
+            var condition = $("#user_360_upload").prop("disabled");
+            $("#user_360_upload").prop("disabled", condition ? false : true);
+        });
+        $("#background_direct").on("click", function() {
+            var condition = $("#background_upload").prop("disabled");
+            $("#background_upload").prop("disabled", condition ? false : true);
+        });
+
+
+
+
+
+
+
+        $("#dance_upload").on("change", function() {
+            const file = document.getElementById("dance_upload").files[0];
+            const videourl = URL.createObjectURL(file);
+            document.getElementById("preview1").setAttribute("src", videourl);
+            document.getElementById("preview1").play();
+        })
+        $("#user_360_upload").on("change", function() {
+            const file = document.getElementById("user_360_upload").files[0];
+            const videourl = URL.createObjectURL(file);
+            document.getElementById("preview2").setAttribute("src", videourl);
+            document.getElementById("preview2").play();
+        })
+        $("#background_upload").on("change", function() {
+            const file = document.getElementById("background_upload").files[0];
+            const videourl = URL.createObjectURL(file);
+            document.getElementById("preview3").setAttribute("src", videourl);
+            document.getElementById("preview3").play();
+        })
+    </script>
+{% endblock %}

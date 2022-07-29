@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block subtitle %}
+    <strong>imitator</strong>
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+    <div class="card text-white bg-secondary mt-4 ml-5 mr-5 mb-5">
+        <div class="card-body">
+            <div class="row justify-content-center mb-4">
+                <div>
+                    <strong>프로그램 실행에 시간이 걸립니다. 완료되면 자동으로 페이지가 넘어갑니다.</strong>
+                    <div class="spinner-border ml-auto" role="status" aria-hidden="true"></div>
+                </div>
+            </div>
+            <div class="col-6">
+                <video controls autoplay src="{{dance_file}}" width="640px", height="360px" type="video/mp4"></video>
+            </div>
+            <div class="col-6">
+                <video controls autoplay src="{{user_360_file}}" width="640px", height="360px" type="video/mp4"></video>
+            </div>
+            <div class="col-6">
+                <img src="{{bg_file}}" width="640px", height="360px" type="img/png"/>
+            </div>
+        <div class="card-body">
+    </div>
+</div>
+<form style="display: none" action="/menu2_proc" method="POST" id="form">
+    <input type="hidden" name="dance_file" value="{{dance_file}}"/>
+    <input type="hidden" name="user_360_file" value="{{user_360_file}}"/>
+    <input type="hidden" name="bg_file" value="{{bg_file}}"/>
+</form>
+{% endblock %}
+{% block additional_body %}
+    <script>
+        window.onload = function() {
+            $("#form").submit();
+        }
+    </script>
+{% endblock %}
